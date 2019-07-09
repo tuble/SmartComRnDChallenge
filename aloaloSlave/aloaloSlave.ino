@@ -4,6 +4,7 @@
 #define CLOCK_IN 2
 #define LED4 0
 #define MESSAGE_LENGTH 4
+#define NOTE_LENGTH 250
 
 
 int received_info[MESSAGE_LENGTH] = {};

@@ -6,7 +6,7 @@
 #define CLOCK_OUT 2
 #define AUDIO_OUT 3
 
-#define MESSAGE_LENGTH 1
+#define MESSAGE_LENGTH 2
 #define NOTE_LENGTH 250
 
 // MOSI -> TP4 (0 TO 3) bqla jica
@@ -27,7 +27,6 @@ void setup() {
 
 void loop() {
   // send message
-
   while (digitalRead(CLOCK_OUT) == 1 && msg_sent == false) {
     send_bits();
     digitalWrite(CLOCK_OUT, LOW); // stop msg transmission

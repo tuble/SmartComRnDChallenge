@@ -28,7 +28,6 @@ void loop() {
 // 11|11 - >  3|3 max; 0|0min
 //            6.6max; 0.0min
 
-// MISHI MISHI MISHI MISHI MISHI MISHI MISHI MISHI MISHI MISHI MISHI MISHI MISHI MISHI MISHI MISHI MISHI MISHI MISHI MISHI MISHI MISHI MISHI MISHI MISHI MISHI
 
 void playNote(float half_period) {
 
@@ -42,7 +41,7 @@ void playNote(float half_period) {
 
 }
 
-float dec(float playNote){
-
-  float adivel[] = {987.77, 923.33, 880.00, };
-}
+//float dec(float playNote){
+//
+//  float adivel[] = {987.77, 923.33, 880.00, };
+//}
