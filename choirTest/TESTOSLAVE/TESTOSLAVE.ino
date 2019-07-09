@@ -3,9 +3,9 @@
 #define SLAVE_RECEIVE 3
 #define CLOCK_IN 2
 #define AUDIO_OUT 0
+
 #define MESSAGE_LENGTH 4
 #define NOTE_LENGTH 250
-
 
 //int received_info = 0;
 int i = 0;
@@ -20,25 +20,21 @@ void setup() {
 void loop() {
 
   while (digitalRead(CLOCK_IN)) {
-    receive_info();
+    sing = receive_info();
   }
 
   while (sing) {
-    if(digitalRead(CLOCK_IN)){
+    if (digitalRead(CLOCK_IN)) {
       break;
     }
-         
+
     play_note(1.5 * 2); // oshte po dobrata
-//    delay(125);
   }
-
-  // b o z a
-
 }
 
-void receive_info() { // void receive_info(int bit_position)
-  // return int **
-  sing = digitalRead(SLAVE_RECEIVE);
+int receive_info() { // void receive_info(int bit_position)
+  //  sing = digitalRead(SLAVE_RECEIVE);
+  return digitalRead(SLAVE_RECEIVE);
 
 }
 
