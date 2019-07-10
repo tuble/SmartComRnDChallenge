@@ -8,27 +8,41 @@
 #define NOTE_LENGTH 250
 
 //int received_info = 0;
-int i = 0;
-int sing = 0;
+
+bool sing = false;
 
 void setup() {
   pinMode(SLAVE_RECEIVE, INPUT);
   pinMode(CLOCK_IN, INPUT);
   pinMode(AUDIO_OUT, OUTPUT);
+  pinMode(1, INPUT);
+  //  digitalWrite(1, LOW);
 }
 
 void loop() {
 
-  while (digitalRead(CLOCK_IN)) {
-    sing = receive_info();
-  }
-
-  while (sing) {
-    if (digitalRead(CLOCK_IN)) {
-      break;
+  // get info from master, while CLOCK_IN = HIGH
+  while (digitalRead(CLOCK_IN) == HIGH) {
+    int i = receive_info();
+    if (i == 1) {
+      sing = true;
+    } else {
+      sing = false;
     }
 
-    play_note(1.5 * 2); // oshte po dobrata
+  }
+
+  // if CLOCK_IN = LOW, slave is not receiveing => play note
+
+  while (sing == true) { // sing, if "told" by master to sing
+    if (digitalRead(CLOCK_IN) == HIGH) { // exit if clock is HIGH
+      break;
+    }
+    play_note(1.5 * 2);
+    //    digitalWrite(AUDIO_OUT, HIGH);
+    //    delay(50);
+    //    digitalWrite(AUDIO_OUT, LOW);
+    //    delay(50);
   }
 }
 

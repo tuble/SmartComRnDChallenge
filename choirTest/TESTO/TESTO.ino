@@ -5,7 +5,7 @@
 #define AUDIO_OUT 3
 
 #define MESSAGE_LENGTH 2
-#define NOTE_LENGTH 250
+#define NOTE_LENGTH 500
 
 bool start_msg_sent;
 bool stop_msg_sent;
@@ -17,24 +17,27 @@ void setup() {
   digitalWrite(CLOCK_OUT, HIGH);
   start_msg_sent = false;
   stop_msg_sent = false;
+  pinMode(1, INPUT);
 }
 
 void loop() {
-
   // send start message
   send_start_msg();
 
   // play note
   if (stop_msg_sent == false) {
     for (int i = 0; i < NOTE_LENGTH; i++ ) {
-      play_note(1.5); // nai dobrata
+      play_note(1.5);
+      //      digitalWrite(AUDIO_OUT, HIGH);
+      //      delay(50);
+      //      digitalWrite(AUDIO_OUT, LOW);
+      //      delay(50);
     }
     digitalWrite(CLOCK_OUT, HIGH); // prep for stop_msg transmission
   }
 
   // send stop message
   send_stop_msg();
-
 }
 
 void send_start_msg() {
