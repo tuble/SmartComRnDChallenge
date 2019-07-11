@@ -39,6 +39,10 @@ void loop() {
       break;
     }
     play_note(1.5 * 2);
+    play_note(3.3 * 2);
+    play_note(1.5 * 2);
+    play_note(3.3 * 2);
+   
     //    digitalWrite(AUDIO_OUT, HIGH);
     //    delay(50);
     //    digitalWrite(AUDIO_OUT, LOW);
