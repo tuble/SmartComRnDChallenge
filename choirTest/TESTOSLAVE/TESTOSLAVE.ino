@@ -9,63 +9,50 @@
 
 //int received_info = 0;
 
-bool sing = false;
+bool sing;
+int i;
 
 void setup() {
   pinMode(SLAVE_RECEIVE, INPUT);
   pinMode(CLOCK_IN, INPUT);
   pinMode(AUDIO_OUT, OUTPUT);
   pinMode(1, INPUT);
-  //  digitalWrite(1, LOW);
+  sing = false;
+  i = 0;
 }
 
 void loop() {
 
   // get info from master, while CLOCK_IN = HIGH
   while (digitalRead(CLOCK_IN) == HIGH) {
-    int i = receive_info();
-    if (i == 1) {
+    //    i = receive_info();
+    if (receive_info() == HIGH) { // b o z a
       sing = true;
     } else {
       sing = false;
     }
-
   }
 
-  // if CLOCK_IN = LOW, slave is not receiveing => play note
+  if (sing == true) {
+    play_note(1.6, 64); //////////
+    delay(200);
 
-  while (sing == true) { // sing, if "told" by master to sing
-    if (digitalRead(CLOCK_IN) == HIGH) { // exit if clock is HIGH
-      break;
-    }
-    play_note(1.5 * 2);
-    play_note(3.3 * 2);
-    play_note(1.5 * 2);
-    play_note(3.3 * 2);
-   
-    //    digitalWrite(AUDIO_OUT, HIGH);
-    //    delay(50);
-    //    digitalWrite(AUDIO_OUT, LOW);
-    //    delay(50);
+    play_note(0.6, 128);
+    delay(50);
   }
 }
 
 int receive_info() { // void receive_info(int bit_position)
-  //  sing = digitalRead(SLAVE_RECEIVE);
   return digitalRead(SLAVE_RECEIVE);
-
 }
 
-void play_note(float half_period) {
-  digitalWrite(AUDIO_OUT, HIGH);
-  delay(half_period);
-  digitalWrite(AUDIO_OUT, LOW);
-  delay(half_period);
-}
+void play_note(float half_period, int repetitions) {
+  // repetitions = number of periods
+  for (int i = 0; i < repetitions; i++) {
+    digitalWrite(AUDIO_OUT, HIGH);
+    delay(half_period * 2); // * 2
+    digitalWrite(AUDIO_OUT, LOW);
+    delay(half_period * 2);
+  }
 
-//void bin_to_dec(int info_stream[], int len) {
-//  for(int i = 0; i < len; i++) {
-//
-//  }
-//
-//}
+}
